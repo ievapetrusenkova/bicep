@@ -2,15 +2,10 @@
 param prefixName string = 'ievap'
 @description('Location for all resources.')
 param location string = resourceGroup().location
-param prefixName string
-param location string = resourceGroup().location
 param appPlanId string
 param environmentName string = 'dev'
 var appName = '${prefixName}App-${environmentName}'
-var currentStack = 'dotnet'
-var netFrameworkVersion = 'v4.8'
-var alwaysOn = false
-param appPlanId string 
+
 @description('The language stack of the app.')
 @allowed([
   '.net'
