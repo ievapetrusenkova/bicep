@@ -13,7 +13,7 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
 }
 
-module storage 'storage.bicep' = {
+module storage 'Models/storage.bicep' = {
   scope: rg
   name: myStorage
   params: {
@@ -21,7 +21,7 @@ module storage 'storage.bicep' = {
     location: rg.location
   }
 }
-module appPlan 'appServicePlan.bicep' = {
+module appPlan 'Models/appServicePlan.bicep' = {
   scope: rg
   name: appService
   params: {
@@ -29,7 +29,7 @@ module appPlan 'appServicePlan.bicep' = {
     environmentName: environmentName
   }
 }
-module webApp 'app.bicep' = {
+module webApp 'Models/app.bicep' = {
   scope: rg
   name: appName
   params: {
@@ -42,7 +42,7 @@ module webApp 'app.bicep' = {
     appPlan
   ]
 }
-module appInsight 'appInsights.bicep' = {
+module appInsight 'Models/appInsights.bicep' = {
   scope: rg
   name: appInsights
   params: {

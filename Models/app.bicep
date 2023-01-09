@@ -6,10 +6,24 @@ var appName = '${prefixName}App-${environmentName}'
 var currentStack = 'dotnet'
 var netFrameworkVersion = 'v4.8'
 var alwaysOn = false
+var identityName = '${appName}-identity'
+
+resource identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' = {
+  name: identityName
+  location: location
+}
 
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: appName
   location: location
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${identity.id}': {
+        
+      }
+    }
+  }
   properties: {
     siteConfig: {
       appSettings: [
@@ -31,11 +45,11 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'APPINSIGHTS_PROFILERFEATURE_VERSION'
-          value: 'disabled'
+          value: 'enabled'
         }
         {
           name: 'APPINSIGHTS_SNAPSHOTFEATURE_VERSION'
-          value: 'disabled'
+          value: 'enabled'
         }
         {
           name: 'InstrumentationEngine_EXTENSION_VERSION'
