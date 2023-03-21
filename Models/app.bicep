@@ -77,3 +77,4 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 output webAppName string = webApp.name
 output siteURL string = webApp.properties.hostNames[0]
+output appPlan string = appPlanId
